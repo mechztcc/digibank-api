@@ -1,13 +1,29 @@
 import { IUser } from '../../domain/models/entities/User.interface';
 import { IUsersRepository } from '../../domain/repositories/interfaces/UsersRepository.interface';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, PrismaPromise } from '@prisma/client';
 
 export class UsersRepository implements IUsersRepository {
+  private repository: PrismaClient = new PrismaClient();
+
   constructor() {}
 
-  async findById(): Promise<IUser | null> {
-    const repository = new PrismaClient();
-    const user = await repository.user.findFirst();
+  create(payload: IUser): Promise<IUser> {
+    const { document, name, password } = payload;
+
+    const user = this.repository.user.create({
+      data: { document, name, password },
+    });
+
+    return user;
+  }
+
+  async index(): Promise<IUser[]> {
+    const users = await this.repository.user.findMany();
+    return users;
+  }
+
+  async findById(id: number): Promise<IUser | null> {
+    const user = await this.repository.user.findUnique({ where: { id } });
 
     return user;
   }

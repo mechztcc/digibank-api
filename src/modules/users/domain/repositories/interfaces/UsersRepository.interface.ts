@@ -1,5 +1,9 @@
 import { IUser } from '../../models/entities/User.interface';
 
 export interface IUsersRepository {
-  findById(): Promise<IUser | null>;
+  findById(id: number): Promise<IUser | null>;
+
+  create(user: IUser): Promise<IUser>;
+
+  index(): Promise<IUser[]>;
 }
