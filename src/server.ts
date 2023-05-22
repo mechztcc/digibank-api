@@ -1,8 +1,8 @@
-import "express-async-errors";
-import { config } from "dotenv";
+import 'express-async-errors';
+import { config } from 'dotenv';
 
-import express, { NextFunction, Request, Response } from "express";
-import DefaultException from "./configs/errors/DefaultExcection";
+import express, { NextFunction, Request, Response } from 'express';
+import DefaultException from './configs/errors/DefaultExcection';
 
 config();
 const app = express();
@@ -18,7 +18,7 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     console.log(error);
     return res
       .status(500)
-      .json({ status: "error", message: "Internal server error" });
+      .json({ status: 'error', message: 'Internal server error' });
   }
 });
 
