@@ -1,15 +1,13 @@
+import { PrismaClient } from '@prisma/client';
 import { IUser } from '../../domain/models/entities/User.interface';
 import { IUsersRepository } from '../../domain/repositories/interfaces/UsersRepository.interface';
-import { PrismaClient, PrismaPromise } from '@prisma/client';
 
 export class UsersRepository implements IUsersRepository {
   private repository: PrismaClient = new PrismaClient();
 
   constructor() {}
 
-  create(payload: IUser): Promise<IUser> {
-    const { document, name, password } = payload;
-
+  create({ document, name, password }: IUser): Promise<IUser> {
     const user = this.repository.user.create({
       data: { document, name, password },
     });

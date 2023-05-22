@@ -11,8 +11,8 @@ export class CreateUserService {
   constructor(
     @inject('UsersRepository') private usersRepository: IUsersRepository
   ) {}
-  async execute(): Promise<any> {
-    const user = this.usersRepository.findById();
+  async execute({ document, name, password }: IRequest): Promise<any> {
+    const user = this.usersRepository.create({ document, name, password });
 
     return user;
   }
