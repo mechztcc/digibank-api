@@ -1,4 +1,7 @@
+import 'reflect-metadata';
 import 'express-async-errors';
+import './shared/container';
+
 import { config } from 'dotenv';
 
 import express, { NextFunction, Request, Response } from 'express';
@@ -24,6 +27,6 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   }
 });
 
-app.listen(process.env.API_PORT, () => {
-  console.log(`Server running at ${process.env.API_PORT}`);
+app.listen(3336, () => {
+  console.log(`Server running at ${3336}`);
 });
