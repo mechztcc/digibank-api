@@ -6,4 +6,6 @@ export interface IUsersRepository {
   create(user: IUser): Promise<IUser>;
 
   index(): Promise<IUser[]>;
+
+  findByDocument(document: string): Promise<IUser | null>;
 }

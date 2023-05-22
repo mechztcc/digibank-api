@@ -6,6 +6,10 @@ export class UsersRepository implements IUsersRepository {
   private repository: PrismaClient = new PrismaClient();
 
   constructor() {}
+  findByDocument(document: string): Promise<IUser | null> {
+    const userExists = this.repository.user.findUnique({ where: { document } });
+    return userExists;
+  }
 
   create({ document, name, password }: IUser): Promise<IUser> {
     const user = this.repository.user.create({
