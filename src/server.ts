@@ -3,11 +3,13 @@ import { config } from 'dotenv';
 
 import express, { NextFunction, Request, Response } from 'express';
 import DefaultException from './configs/errors/DefaultExcection';
+import routes from './shared/routes';
 
 config();
 const app = express();
 
 app.use(express.json());
+app.use(routes);
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   if (error instanceof DefaultException) {
