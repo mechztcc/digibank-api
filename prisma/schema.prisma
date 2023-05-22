@@ -2,9 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-  binaryTargets = ["native"]
-
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
@@ -13,8 +12,8 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  document  String   @unique
-  name      String
-  password  String
+  id       Int    @id @default(autoincrement())
+  document String @unique
+  name     String
+  password String
 }

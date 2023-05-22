@@ -5,9 +5,9 @@ import { PrismaClient } from '@prisma/client';
 export class UsersRepository implements IUsersRepository {
   constructor() {}
 
-  findById(): Promise<any> {
+  async findById(): Promise<IUser | null> {
     const repository = new PrismaClient();
-    const user = repository.user.findFirst();
+    const user = await repository.user.findFirst();
 
     return user;
   }
