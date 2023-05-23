@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 import { IUsersRepository } from '../../domain/repositories/interfaces/UsersRepository.interface';
 import DefaultException from 'src/configs/errors/DefaultExcection';
 import { HTTPSTATUSCODE } from '@shared/types/HttpStatusCode';
+import { hash, hashSync } from 'bcryptjs';
 
 interface IRequest {
   document: string;
@@ -23,7 +24,13 @@ export class CreateUserService {
       );
     }
 
-    const user = this.usersRepository.create({ document, name, password });
+    const hashedPass = await hash(password, 8);
+
+    const user = await this.usersRepository.create({
+      document,
+      name,
+      password: hashedPass,
+    });
 
     return user;
   }
