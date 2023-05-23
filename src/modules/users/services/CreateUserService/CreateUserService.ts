@@ -24,6 +24,13 @@ export class CreateUserService {
       );
     }
 
+    if (password.length < 8) {
+      throw new DefaultException(
+        'Password lenght must be at least 8 characters.',
+        HTTPSTATUSCODE.UNPROCESSABLE_ENTITY
+      );
+    }
+
     const hashedPass = await hash(password, 8);
 
     const user = await this.usersRepository.create({
