@@ -16,6 +16,7 @@ export class CreateUserService {
   ) {}
   async execute({ document, name, password }: IRequest): Promise<any> {
     const userExists = await this.usersRepository.findByDocument(document);
+    console.log(document, name, password);
 
     if (userExists) {
       throw new DefaultException(
